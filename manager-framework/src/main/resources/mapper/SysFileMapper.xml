@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elearning.framework.mapper.SysFileMapper" >
+  <resultMap id="BaseResultMap" type="com.elearning.framework.domain.SysFile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="file_size" property="fileSize" jdbcType="INTEGER" />
+    <result column="biz_type" property="bizType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="download_count" property="downloadCount" jdbcType="INTEGER" />
+    <result column="thumbnail_path" property="thumbnailPath" jdbcType="VARCHAR" />
+    <result column="linked_url" property="linkedUrl" jdbcType="VARCHAR" />
+    <result column="is_banner" property="isBanner" jdbcType="INTEGER" />
+    <result column="version_no" property="versionNo" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, file_size, biz_type, status, path, create_user_id, download_count, thumbnail_path, 
+    linked_url, is_banner, version_no, create_time, update_time, update_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.elearning.framework.domain.SysFileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elearning.framework.domain.SysFile" >
+    insert into sys_file (id, name, file_size, 
+      biz_type, status, path, 
+      create_user_id, download_count, thumbnail_path, 
+      linked_url, is_banner, version_no, 
+      create_time, update_time, update_user
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{fileSize,jdbcType=INTEGER}, 
+      #{bizType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=INTEGER}, #{downloadCount,jdbcType=INTEGER}, #{thumbnailPath,jdbcType=VARCHAR}, 
+      #{linkedUrl,jdbcType=VARCHAR}, #{isBanner,jdbcType=INTEGER}, #{versionNo,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.elearning.framework.domain.SysFile" >
+    insert into sys_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="fileSize != null" >
+        file_size,
+      </if>
+      <if test="bizType != null" >
+        biz_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="downloadCount != null" >
+        download_count,
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path,
+      </if>
+      <if test="linkedUrl != null" >
+        linked_url,
+      </if>
+      <if test="isBanner != null" >
+        is_banner,
+      </if>
+      <if test="versionNo != null" >
+        version_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="downloadCount != null" >
+        #{downloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailPath != null" >
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="linkedUrl != null" >
+        #{linkedUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isBanner != null" >
+        #{isBanner,jdbcType=INTEGER},
+      </if>
+      <if test="versionNo != null" >
+        #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elearning.framework.domain.SysFileExample" resultType="java.lang.Integer" >
+    select count(*) from sys_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elearning.framework.domain.SysFile" >
+    update sys_file
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        file_size = #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="bizType != null" >
+        biz_type = #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="downloadCount != null" >
+        download_count = #{downloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="linkedUrl != null" >
+        linked_url = #{linkedUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isBanner != null" >
+        is_banner = #{isBanner,jdbcType=INTEGER},
+      </if>
+      <if test="versionNo != null" >
+        version_no = #{versionNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elearning.framework.domain.SysFile" >
+    update sys_file
+    set name = #{name,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=INTEGER},
+      biz_type = #{bizType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      path = #{path,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      download_count = #{downloadCount,jdbcType=INTEGER},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      linked_url = #{linkedUrl,jdbcType=VARCHAR},
+      is_banner = #{isBanner,jdbcType=INTEGER},
+      version_no = #{versionNo,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

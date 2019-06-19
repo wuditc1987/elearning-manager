@@ -1,0 +1,88 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    max-threads: 300
+    # tomcat最大线程数，默认为200
+    uri-encoding: UTF-8
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+
+
+# 日志配置
+logging:
+  level:
+    com.elearning: debug
+    org.springframework: info
+spring:
+  datasource:
+    druid:
+      master:
+        url: jdbc:mysql://localhost:3306/env_dev?useUnicode=true&characterEncoding=utf8&useTimezone=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        username: root
+        password: CTeDv9wTw3Lt86sQE95C1/69AaT4Ob8LlstQ45gDpQGA+lBrm2Fzpz/oXfXFStybzGGdr+4l7mSpHZE/xDzkAWrgW8Vx4INMduZu4mTW9cxMDsmFtM+98PN+1+1ceswguu53+O954QNOvN4japhMy6SFcPyVbJ5xvBr9zfa3qDMNPvbtwQqMgzhLPsPSt42kSb6POTxrr41DXErgyOvEX2d4RODtkjdwBaRJ68eEBncdikA+J5QF8pOG1g7FJiBNDZhF/O7Di9WLCgRGzP/zhWNJsXnWwyYut+wDXSASifjGdrVhlfSjRKl3oPWpec6A4n10uXsA3hWeijDivmSIbQ==
+      cluster:
+        enabled: true
+        url: jdbc:mysql://localhost:3306/env_test?useUnicode=true&characterEncoding=utf8&useTimezone=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        username: root
+        password: CTeDv9wTw3Lt86sQE95C1/69AaT4Ob8LlstQ45gDpQGA+lBrm2Fzpz/oXfXFStybzGGdr+4l7mSpHZE/xDzkAWrgW8Vx4INMduZu4mTW9cxMDsmFtM+98PN+1+1ceswguu53+O954QNOvN4japhMy6SFcPyVbJ5xvBr9zfa3qDMNPvbtwQqMgzhLPsPSt42kSb6POTxrr41DXErgyOvEX2d4RODtkjdwBaRJ68eEBncdikA+J5QF8pOG1g7FJiBNDZhF/O7Di9WLCgRGzP/zhWNJsXnWwyYut+wDXSASifjGdrVhlfSjRKl3oPWpec6A4n10uXsA3hWeijDivmSIbQ==
+      filters: config,wall,stat
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      connection-properties: config.decrypt=true;config.decrypt.key=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm54XtB0IFvbYa5uubixI4hXfyzRUapvAeLdg7sQf7svpQ4ZFkb3J3sKIgCdTqXzpYKZB9s1L1b89hjddK1SSEoJLJkTUYff1vQkcQBWCl/dOZxkZLqRlob1WFin9Wrqs2VTO30ssyFBuyNFfMV+H55ZKy90YQSQeyClibk+JRkwUZV9E0DRoDeMOFoSDu9BZjfDhSHLeo0BFwSmHNCLhs4QrwB79maTSY3OZuhBMhW2JJ33IQri2Pn6GR90mEVN5HSxsyFob9QcMAxMkhe5C5I4CCccR3FCPM0619qlTEaqVjAdvVVzFztMAnBz6BZ/6dlcyrspdO1GI6CTyRgg8twIDAQAB
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        session-stat-enable: true
+        session-stat-max-count: 10
+      stat-view-servlet:
+        enabled: true
+        allow:
+        url-pattern: /monitor/druid/*
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 10
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+#  redis:
+#    url: localhost
+
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.elearning
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:config/mybatis-config.xml
+
+#线程池
+thread:
+  pool:
+    keepAliveSeconds: 2000
+    maxPoolSize: 100
+    corePoolSize: 10
