@@ -11,6 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * @author wudi
+ * @version 1.0
+ * @Description druid数据源属性
+ * @date 2019/6/20 1:40 PM
+ */
 @Configuration
 public class DruidDataSourceProperties {
 

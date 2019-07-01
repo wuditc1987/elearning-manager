@@ -1,8 +1,13 @@
 package com.elearning.framework.domain;
 
-import java.util.Date;
+import com.elearning.common.base.domain.BaseEntity;
 
-public class SysUser {
+/**
+ * 用户实体类
+ * @author wudi
+ * @date 2019-06-19
+ */
+public class SysUser extends BaseEntity {
     private Integer id;
 
     private String name;
@@ -23,16 +28,7 @@ public class SysUser {
 
     private String description;
 
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Integer updateUserId;
-
-    private Integer createUserId;
-
-    private Integer versionNo;
-
+    @Override
     public Integer getId() {
         return id;
     }
@@ -113,43 +109,4 @@ public class SysUser {
         this.description = description == null ? null : description.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getUpdateUserId() {
-        return updateUserId;
-    }
-
-    public void setUpdateUserId(Integer updateUserId) {
-        this.updateUserId = updateUserId;
-    }
-
-    public Integer getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public Integer getVersionNo() {
-        return versionNo;
-    }
-
-    public void setVersionNo(Integer versionNo) {
-        this.versionNo = versionNo;
-    }
 }

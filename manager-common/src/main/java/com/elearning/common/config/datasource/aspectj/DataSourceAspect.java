@@ -31,22 +31,6 @@ public class DataSourceAspect {
     public void dsPointCut(){
     }
 
-    /*@Before("dsPointCut()")
-    public void before(JoinPoint point){
-        MethodSignature signature = (MethodSignature)point.getSignature();
-        Method method = signature.getMethod();
-        DataSource dataSource = method.getAnnotation(DataSource.class);
-        if(dataSource != null){
-            DynamicDataSourceContextHolder.setDataSource(dataSource.type());
-        }
-    }
-
-    @AfterReturning("dsPointCut()")
-    public void after(JoinPoint point){
-        DynamicDataSourceContextHolder.clear();
-    }*/
-
-
     /**
      * 环绕通知
      * @param point

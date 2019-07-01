@@ -10,6 +10,9 @@ server:
     # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
 
+elearning:
+  version: 1.0.0
+  description: 易学习管理后台
 
 # 日志配置
 logging:
@@ -67,8 +70,20 @@ spring:
         wall:
           config:
             multi-statement-allow: true
-#  redis:
-#    url: localhost
+  redis:
+    host: 39.105.7.35
+    port: 6379
+    password: wudi@1987
+    timeout: 10000ms #连接超时时间（毫秒）
+    expiry: 60   #访问超时时间
+    ttl: 0s #全局缓存过期时间，为0则不过期
+    keyPrefix : _
+    # spring redis boot starter在2.0时连接的客户端由jedis变为了lettuce，但是依然支持jedis的相关配置
+    lettuce:
+      pool:
+        max-active: 10   #连接池最大连接数（使用负值表示没有限制）
+        max-wait: 10000ms  #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8
 
 
 # MyBatis
